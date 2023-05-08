@@ -63,6 +63,8 @@
 ### 2
 #### 将这里的除README.md和.git的文件复制到官网manifests-master目录下
 ### 3
+#### 注意：在运行前，如果对挂载、节点等有要求，先修改kind-ingress-config.yaml(里面笔者挂载了本地的jupyterlab的目录)
+#### 这步包括：修改宿主机打开文件个数限制--导出镜像列表，更改配置文件(example/*)--建立集群--启动(初始化)kubeflow(无限循环，不会结束，可以手动结束)
 #### 在官网manifests-master目录下运行pull_and_kind_load_dockerimage.sh
 ### 4
 #### 根据下面的Warning进行补充操作
