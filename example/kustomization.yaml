@@ -1,0 +1,182 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+sortOptions:
+  order: legacy
+  legacySortOptions:
+    orderFirst:
+    - Namespace
+    - ResourceQuota
+    - StorageClass
+    - CustomResourceDefinition
+    - MutatingWebhookConfiguration
+    - ServiceAccount
+    - PodSecurityPolicy
+    - Role
+    - ClusterRole
+    - RoleBinding
+    - ClusterRoleBinding
+    - ConfigMap
+    - Secret
+    - Endpoints
+    - Service
+    - LimitRange
+    - PriorityClass
+    - PersistentVolume
+    - PersistentVolumeClaim
+    - Deployment
+    - StatefulSet
+    - CronJob
+    - PodDisruptionBudget
+    orderLast:
+    - ValidatingWebhookConfiguration
+
+resources:
+# Cert-Manager
+- ../common/cert-manager/cert-manager/base
+- ../common/cert-manager/kubeflow-issuer/base
+# Istio
+- ../common/istio-1-16/istio-crds/base
+- ../common/istio-1-16/istio-namespace/base
+- ../common/istio-1-16/istio-install/base
+# OIDC Authservice
+- ../common/oidc-authservice/base
+# Dex
+- ../common/dex/overlays/istio
+# KNative
+- ../common/knative/knative-serving/overlays/gateways
+- ../common/knative/knative-eventing/base
+- ../common/istio-1-16/cluster-local-gateway/base
+# Kubeflow namespace
+- ../common/kubeflow-namespace/base
+# Kubeflow Roles
+- ../common/kubeflow-roles/base
+# Kubeflow Istio Resources
+- ../common/istio-1-16/kubeflow-istio-resources/base
+
+
+# Kubeflow Pipelines
+- ../apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
+# Katib
+- ../apps/katib/upstream/installs/katib-with-kubeflow
+# Central Dashboard
+- ../apps/centraldashboard/upstream/overlays/kserve
+# Admission Webhook
+- ../apps/admission-webhook/upstream/overlays/cert-manager
+# Jupyter Web App
+- ../apps/jupyter/jupyter-web-app/upstream/overlays/istio
+# Notebook Controller
+- ../apps/jupyter/notebook-controller/upstream/overlays/kubeflow
+# Profiles + KFAM
+- ../apps/profiles/upstream/overlays/kubeflow
+# Volumes Web App
+- ../apps/volumes-web-app/upstream/overlays/istio
+# Tensorboards Controller
+-  ../apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow
+# Tensorboard Web App
+-  ../apps/tensorboard/tensorboards-web-app/upstream/overlays/istio
+# Training Operator
+- ../apps/training-operator/upstream/overlays/kubeflow
+# User namespace
+- ../common/user-namespace/base
+
+# KServe
+- ../contrib/kserve/kserve
+- ../contrib/kserve/models-web-app/overlays/kubeflow
+
+
+
+images: 
+ - name: gcr.io/arrikto/kubeflow/oidc-authservice:e236439
+   newName: gcr.m.daocloud.io/arrikto/kubeflow/oidc-authservice
+   newTag: e236439
+ - name: gcr.io/ml-pipeline/frontend:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/frontend
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/visualization-server:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/visualization-server
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/knative-releases/knative.dev/eventing/cmd/controller@sha256:33d78536e9b38dbb2ec2952207b48ff8e05acb48e7d28c2305bd0a0f7156198f
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/eventing/cmd/controller
+ - name: gcr.io/knative-releases/knative.dev/eventing/cmd/mtping@sha256:282b5265e1ef26309b3343038c9b4f172654e06cbee46f6ddffd23ea9ad9a3be
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/eventing/cmd/mtping
+ - name: gcr.io/knative-releases/knative.dev/eventing/cmd/webhook@sha256:d217ab7e3452a87f8cbb3b45df65c98b18b8be39551e3e960cd49ea44bb415ba
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/eventing/cmd/webhook
+ - name: gcr.io/knative-releases/knative.dev/net-istio/cmd/controller@sha256:2b484d982ef1a5d6ff93c46d3e45f51c2605c2e3ed766e20247d1727eb5ce918
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/net-istio/cmd/controller
+ - name: gcr.io/knative-releases/knative.dev/net-istio/cmd/webhook@sha256:59b6a46d3b55a03507c76a3afe8a4ee5f1a38f1130fd3d65c9fe57fff583fa8d
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/net-istio/cmd/webhook
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:c3bbf3a96920048869dcab8e133e00f59855670b8a0bbca3d72ced2f512eb5e1
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/activator
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:caae5e34b4cb311ed8551f2778cfca566a77a924a59b775bd516fa8b5e3c1d7f
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/autoscaler
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:38f9557f4d61ec79cc2cdbe76da8df6c6ae5f978a50a2847c22cc61aa240da95
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/controller
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:a4ba0076df2efaca2eed561339e21b3a4ca9d90167befd31de882bff69639470
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:763d648bf1edee2b4471b0e211dbc53ba2d28f92e4dae28ccd39af7185ef2c96
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/domain-mapping
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:505179c0c4892ea4a70e78bc52ac21b03cd7f1a763d2ecc78e7bbaa1ae59c86c
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/queue
+ - name: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:bc13765ba4895c0fa318a065392d05d0adc0e20415c739e0aacb3f56140bf9ae
+   newName: gcr.m.daocloud.io/knative-releases/knative.dev/serving/cmd/webhook
+ - name: gcr.io/kubebuilder/kube-rbac-proxy:v0.13.1
+   newName: gcr.m.daocloud.io/kubebuilder/kube-rbac-proxy
+   newTag: v0.13.1
+ - name: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+   newName: gcr.m.daocloud.io/kubebuilder/kube-rbac-proxy
+   newTag: v0.8.0
+ - name: gcr.io/ml-pipeline/api-server:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/api-server
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/cache-server:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/cache-server
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/metadata-writer:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/metadata-writer
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/minio:RELEASE.2019-08-14T20-37-41Z-license-compliance
+   newName: gcr.m.daocloud.io/ml-pipeline/minio
+   newTag: RELEASE.2019-08-14T20-37-41Z-license-compliance
+ - name: gcr.io/ml-pipeline/mysql:8.0.26
+   newName: gcr.m.daocloud.io/ml-pipeline/mysql
+   newTag: 8.0.26
+ - name: gcr.io/ml-pipeline/persistenceagent:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/persistenceagent
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/scheduledworkflow:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/scheduledworkflow
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/viewer-crd-controller:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/viewer-crd-controller
+   newTag: 2.0.0-alpha.7
+ - name: gcr.io/ml-pipeline/workflow-controller:v3.3.8-license-compliance
+   newName: gcr.m.daocloud.io/ml-pipeline/workflow-controller
+   newTag: v3.3.8-license-compliance
+ - name: gcr.io/tfx-oss-public/ml_metadata_store_server:1.5.0
+   newName: gcr.m.daocloud.io/tfx-oss-public/ml_metadata_store_server
+   newTag: 1.5.0
+ - name: gcr.io/ml-pipeline/metadata-envoy:2.0.0-alpha.7
+   newName: gcr.m.daocloud.io/ml-pipeline/metadata-envoy
+   newTag: 2.0.0-alpha.7
+ - name: quay.io/jetstack/cert-manager-cainjector:v1.10.1
+   newName: quay.m.daocloud.io/jetstack/cert-manager-cainjector
+   newTag: v1.10.1
+ - name: quay.io/jetstack/cert-manager-controller:v1.10.1
+   newName: quay.m.daocloud.io/jetstack/cert-manager-controller
+   newTag: v1.10.1
+ - name: quay.io/jetstack/cert-manager-webhook:v1.10.1
+   newName: quay.m.daocloud.io/jetstack/cert-manager-webhook
+   newTag: v1.10.1
+ - name: docker.io/kubeflownotebookswg/profile-controller:v1.7.0-rc.0
+   newName: docker.m.daocloud.io/kubeflownotebookswg/profile-controller
+   newTag: v1.7.0-rc.0
+ - name: docker.io/kubeflowkatib/katib-controller:v0.15.0-rc.0
+   newName: docker.m.daocloud.io/kubeflowkatib/katib-controller
+   newTag: v0.15.0-rc.0
+ - name: docker.io/kubeflownotebookswg/poddefaults-webhook:v1.7.0-rc.0
+   newName: docker.m.daocloud.io/kubeflownotebookswg/poddefaults-webhook
+   newTag: v1.7.0-rc.0
+ - name: ghcr.io/dexidp/dex:v2.31.2
+   newName: ghcr.m.daocloud.io/dexidp/dex
+   newTag: v2.31.2

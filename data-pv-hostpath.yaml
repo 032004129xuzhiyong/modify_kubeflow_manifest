@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-pv
+spec:
+  capacity: 
+    storage: 10Gi # 定义 PersistentVolume de 大小
+  accessModes: # 可以被单个客户端挂在为读写模式或者被多个客户端挂在为只读模式
+    - ReadWriteOnce
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain # 当声明被释放后，PersistentVolume 将会被保留（不清理和删除）
+  hostPath:
+    path: /home

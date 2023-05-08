@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: kubeflow-user-example-com
+  name: data-pvc # 声明的名称，稍后将声明当作 pod 的卷使用时需要用到
+spec:
+  resources:
+    requests:
+      storage: 10Gi # 申请 1 GiB 的存储空间
+  accessModes:
+  - ReadWriteOnce # 允许单个客户端访问（同时支持读取和写入操作）
+  storageClassName: ""
