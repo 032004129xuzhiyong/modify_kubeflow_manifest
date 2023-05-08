@@ -1,7 +1,7 @@
 # modify_kubeflow_manifest
-这是Kubeflow Manifest "https://github.com/kubeflow/manifests" ,经过少量修改（只改了一个文件，添加了几个文件），可以在国内安装的笔记。
-非常感谢public-image-mirror "https://github.com/DaoCloud/public-image-mirror" 提供的镜像加速，使得很多在国外的镜像，在国内也可以下载，只需要改变仓库名（添加'.m.daocloud'）。
-这里也包括我安装时踩坑记录。
+#### 这是Kubeflow Manifest "https://github.com/kubeflow/manifests" ,经过少量修改（只改了一个文件，添加了几个文件），可以在国内安装的笔记。
+#### 非常感谢public-image-mirror "https://github.com/DaoCloud/public-image-mirror" 提供的镜像加速，使得很多在国外的镜像，在国内也可以下载，只需要改变仓库名（添加'.m.daocloud'）。
+#### 这里也包括我安装时踩坑记录。
 
 
 # 前置条件 
@@ -56,6 +56,18 @@
 # 5#python
 ###### python3
 
+# 步骤
+### 1
+#### 只要填写errimages.txt,也就是将不能拉取的gcr.io、quay.io、ghcr.io开头的镜像复制进去
+#### 原本是笔者不能拉取的镜像列表
+### 2
+#### 将这里的除README.md和.git的文件复制到官网manifests-master目录下
+### 3
+#### 在官网manifests-master目录下运行pull_and_kind_load_dockerimage.sh
+### 4
+#### 根据下面的Warning进行补充操作
+
+
 
 # Warning1#
 ###### 如果没有auth（namespace），重新用这条命令加载,在打开另一个终端输入
@@ -72,6 +84,8 @@
 ###### kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:80
 
 # Warning4#
+###### 补充
+###### 从本地（宿主机）将目录挂载到集群中，笔者要用到本地的jupyterlab目录的代码和数据，所以声明到pvc中，使用时引用pvc的name。
 ###### kubectl create -f data-pv-hostpath.yaml  (其中持久卷挂载的源目录是/home，和上面kind-ingress-config.yaml中的containerPath: /home要一样)
 ###### kubectl create -f data-pvc.yaml  (持久卷声明，使用了上面的持久卷，当要使用的时候就将它的name声明在volumns中)
 
