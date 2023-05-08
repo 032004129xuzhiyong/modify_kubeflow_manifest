@@ -5,12 +5,12 @@
 
 
 # 前置条件 
-# 1#
+# 1#kind
 #(kind下载地址) https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 #kind version
 #kind v0.18.0 go1.20.2 linux/amd64
 
-# 2#
+# 2#kubectl
 #官网要求（最多1.25）https://github.com/DaoCloud/public-image-mirror
 #(kubectl下载地址) 下载需要指定版本 https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/  
 #kubectl version
@@ -18,13 +18,13 @@
 #Kustomize Version: v4.5.7
 #Server Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.26.3", GitCommit:"9e644106593f3f4aa98f8a84b23db5fa378900bd", GitTreeState:"clean", BuildDate:"2023-03-30T06:34:50Z", GoVersion:"go1.19.7", Compiler:"gc", Platform:"linux/amd64"}
 
-# 3#
+# 3#kustomize
 #虽然kubectl中有kustomize，版本不对，要独立下载(根据官网要求至少5.0.0) https://github.com/DaoCloud/public-image-mirror 
 #(kustomize下载地址) https://github.com/kubernetes-sigs/kustomize/releases
 #kustomize version
 #v5.0.0
 
-# 4#
+# 4#docker
 #docker version
 #Client: Docker Engine - Community
 #Version:           23.0.2
@@ -53,7 +53,7 @@
 #Version:          0.19.0
 #GitCommit:        de40ad0
 
-# 5#
+# 5#python
 #python3
 
 
