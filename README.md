@@ -75,8 +75,8 @@
 #kubectl create -f data-pv-hostpath.yaml  (其中持久卷挂载的源目录是/home，和上面kind-ingress-config.yaml中的containerPath: /home要一样)
 #kubectl create -f data-pvc.yaml  (持久卷声明，使用了上面的持久卷，当要使用的时候就将它的name声明在volumns中)
 #如下所示
-#volumes: 
-#  - name: data-pvc #自定义name
-#    persistentVolumeClaim:
-#      claimName: data-pvc  #data-pvc.yaml中的name，要一样
-#      readOnly: false
+volumes: 
+  - name: data-pvc #自定义name
+    persistentVolumeClaim:
+      claimName: data-pvc  #data-pvc.yaml中的name，要一样
+      readOnly: false
