@@ -91,3 +91,12 @@
 ###### kubectl create -f data-pv-hostpath.yaml  (其中持久卷挂载的源目录是/home，和上面kind-ingress-config.yaml中的containerPath: /home要一样)
 ###### kubectl create -f data-pvc.yaml  (持久卷声明，使用了上面的持久卷，当要使用的时候就将它的name声明在volumns中)
 
+# 最终
+#### 所有运行的pod
+![运行的pod](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-09%20174108.png)
+
+#### kubeflow界面
+##### 使用`kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:80`进行临时端口映射，访问本地浏览器127.0.0.1:8080，出现界面。
+![界面](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-09%20174217.png)
+
+
