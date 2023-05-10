@@ -5,7 +5,7 @@
 
 # 版本
 ![](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-10%20090424.png)
-
+![](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-10%20090443.png)
 
 
 # 前置条件 
