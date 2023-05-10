@@ -87,7 +87,7 @@
 > 只要填写errimages.txt,也就是将不能拉取的gcr.io、quay.io、ghcr.io开头的镜像复制进去 <br/>
 > 原本是笔者不能拉取的镜像列表 <br/>
 ### 第二步
-> 解压manifests.tar.gz(这是kubeflow manifests的源文件)
+> 解压manifests.tar.gz(这是kubeflow manifests的源文件) <br/>
 > 将这里的除README.md、.git、屏幕截图、压缩包外的文件复制到解压的官网manifests目录下 <br/>
 ### 第三歩
 > 注意：在运行前，如果对挂载、节点等有要求，先修改kind-ingress-config.yaml(里面笔者挂载了本地的jupyterlab的目录) <br/>
