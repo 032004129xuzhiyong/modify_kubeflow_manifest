@@ -34,6 +34,7 @@
 > (kind下载地址) https://kind.sigs.k8s.io/docs/user/quick-start/#installation <br/>
 > kind version <br/>
 > kind v0.18.0 go1.20.2 linux/amd64 <br/>
+> kind可以创建多个节点的集群或者多个集群(官网文档：https://kind.sigs.k8s.io/ ) <br/>
 
 ### kubectl
 > 官网要求（最多1.25）https://github.com/DaoCloud/public-image-mirror  <br/>
@@ -44,7 +45,7 @@
 > Server Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.26.3", GitCommit:"9e644106593f3f4aa98f8a84b23db5fa378900bd", GitTreeState:"clean", BuildDate:"2023-03-30T06:34:50Z", GoVersion:"go1.19.7", Compiler:"gc", Platform:"linux/amd64"} <br/>
 
 ### kustomize
-> 虽然kubectl中有kustomize，版本不对，要独立下载(根据官网要求至少5.0.0) https://github.com/DaoCloud/public-image-mirror <br/>
+> 虽然kubectl中有kustomize，版本不对，要**单独下载**(根据官网要求至少5.0.0) https://github.com/DaoCloud/public-image-mirror <br/>
 > (kustomize下载地址) https://github.com/kubernetes-sigs/kustomize/releases <br/>
 > kustomize version <br/>
 > v5.0.0 <br/>
@@ -89,7 +90,7 @@
 > 将这里的除README.md和.git的文件复制到官网manifests-master目录下 <br/>
 ### 第三歩
 > 注意：在运行前，如果对挂载、节点等有要求，先修改kind-ingress-config.yaml(里面笔者挂载了本地的jupyterlab的目录) <br/>
-> 这步包括：修改宿主机打开文件个数限制--导出镜像列表，更改配置文件(example/*)--建立集群--启动(初始化)kubeflow(无限循环，不会结束，可以手动结束) <br/>
+> 这步包括：修改宿主机打开文件个数限制--导出镜像列表，更改配置文件(example/*)--建立集群（一个节点）--启动(初始化)kubeflow(无限循环，不会结束，可以手动结束) <br/>
 > 在官网manifests-master目录下运行pull_and_kind_load_dockerimage.sh <br/>
 ### 第四步
 > 根据下面的Warning进行补充操作 <br/>
