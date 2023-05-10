@@ -4,8 +4,10 @@
 > **非常感谢public-image-mirror "https://github.com/DaoCloud/public-image-mirror" 提供的镜像加速，使得很多在国外的镜像，在国内也可以下载，只需要改变仓库名（添加'.m.daocloud'）。**<br/>
 > **这里也包括我安装时踩坑记录**<br/>
 > **这是国内单机本地安装**
+
+
 ### 环境
-> **windows11专业版**<br/>
+> **Windows11专业版**<br/>
 > **WSL2**<br/>
 > **Ubuntu-22.04**<br/>
 > **WSL 版本： 1.1.6.0**<br/>
@@ -15,7 +17,13 @@
 > **Direct3D 版本： 1.608.2-61064218**<br/>
 > **DXCore 版本： 10.0.25131.1002-220531-1700.rs-onecore-base2-hyp**<br/>
 > **Windows 版本： 10.0.23451.1000**<br/>
-> **docker(Linux安装，非windows桌面版)**<br/>
+> **docker-23.0.2(Linux安装，非windows桌面版)**<br/>
+> **kind-0.18.0**<br/>
+> **kubectl-1.25**<br/>
+> **kustomize-5.0.0**<br/>
+> **python3**<br/>
+
+
 # 版本
 ![](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-10%20090424.png)
 ![](https://github.com/032004129xuzhiyong/modify_kubeflow_manifest/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-05-10%20090443.png)
